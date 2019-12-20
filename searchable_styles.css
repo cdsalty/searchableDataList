@@ -24,18 +24,20 @@ table {
 }
 table td,
 table th {
-  padding: 8px;
+  padding: 12px;
 }
 
 table tr:nth-child(even) {
-  background-color: #878738;
+  background-color: rgb(91, 133, 42);
 }
 table tr:nth-child(odd) {
   background-color: gray;
 }
 
 table tr:hover {
-  background-color: rgb(20, 19, 74);
+  /* background-color: rgb(20, 19, 74); */
+  background-color: white;
+  color: black;
 }
 
 table th {
