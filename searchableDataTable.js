@@ -6,7 +6,6 @@ const tableData = () => {
   // tableEl has two children: thead and tbody
   Array.from(tableEl.children[1].children).forEach(_bodyRowEl => {
     searchData.push(
-      // push an array of the string values listed in each table row
       Array.from(_bodyRowEl.children).map(_cellEl => {
         return _cellEl.innerHTML;
       })
@@ -24,7 +23,29 @@ const createSearchInputElement = () => {
 
 const search = (arr, searchTerm) => {
   if (!searchTerm) return arr;
-  // OTHERWISE RETURN MATCH or ROW WITH MATCHING DATA...
+  // .filter(), .find(), .includes()
+  return arr.filter(row => {
+    return row.find(item =>
+      item.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
+};
+
+// Refresh Table
+
+const refreshTable = data => {
+  const tableBody = document.getElementById("portexe-data-table").children[1]; // this is the '<tbody>'
+  tableBody.innerHTML = "";
+  // run loop within a loop (for 2 dimensional array)
+  data.forEach(row => {
+    const curRow = document.createElement("tr");
+    row.forEach(dataItem => {
+      const curCell = document.createElement("td");
+      curCell.innerText = dataItem;
+      curRow.appendChild(curCell);
+    });
+    tableBody.appendChild(curRow);
+  });
 };
 
 const init = () => {
@@ -36,8 +57,7 @@ const init = () => {
 
   const searchInput = document.getElementById("portexe-search-input");
   searchInput.addEventListener("keyup", e => {
-    // console.log(e.target.value);
-    tableData();
+    refreshTable(search(initialTableData, e.target.value));
   });
 };
 
