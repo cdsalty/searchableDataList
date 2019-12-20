@@ -1,19 +1,18 @@
 // console.log("sanity-check");
 
-// TWO DIMENSIONAL ARRAY, [ [], [], [], ]
 const tableData = () => {
-  const searchData = []; // empty array; to be a two dimensional array
-  const tableEl = document.getElementById("portexe-data-table"); // has two children: the thead and tbody
+  const searchData = [];
+  const tableEl = document.getElementById("portexe-data-table");
+  // tableEl has two children: thead and tbody
   Array.from(tableEl.children[1].children).forEach(_bodyRowEl => {
-    // need to push an array of each of the items
     searchData.push(
+      // push an array of the string values listed in each table row
       Array.from(_bodyRowEl.children).map(_cellEl => {
-        // will return an array of table rows
         return _cellEl.innerHTML;
       })
     );
   });
-  console.log(searchData);
+  return searchData;
 };
 
 const createSearchInputElement = () => {
@@ -23,10 +22,17 @@ const createSearchInputElement = () => {
   return el;
 };
 
+const search = (arr, searchTerm) => {
+  if (!searchTerm) return arr;
+  // OTHERWISE RETURN MATCH or ROW WITH MATCHING DATA...
+};
+
 const init = () => {
   document
     .getElementById("portexe-search-root")
     .appendChild(createSearchInputElement());
+
+  const initialTableData = tableData(); // set initial table to an array of strings
 
   const searchInput = document.getElementById("portexe-search-input");
   searchInput.addEventListener("keyup", e => {
